@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function(event){
   const heart = document.getElementById('heart');
   const submit = document.getElementById('submit');
   const pause = document.getElementById('pause');
-  const commentsList = document.getElementById('comments-list');
+  // const commentsList = document.getElementById('comments-list');
   // assigns functions to each click event and action (functions we'll write)
   plus.addEventListener('click', incrementTimer);
   minus.addEventListener('click', decrementTimer);
   heart.addEventListener('click', likeNumber);
   pause.addEventListener('click', pauseCounter);
-  commentsList.addEventListener('submit', addComment);
+  // commentsList.addEventListener('submit', addComment);
 
 });
 
@@ -87,18 +87,33 @@ function likeNumber() {
   }
 }
 
-function addComment(event) {
+// not working. Clears out everything. Why?
+// function addComment(event) {
+//   event.preventDefault();
+//   const div = document.getElementById('list');
+//   let ul = document.getElementById('comments-list');
+//   let textInput = document.getElementById('comment-input')
+//   if (!ul) {
+//     ul = document.createElement('ul');
+//     ul.setAttribute('id', 'comments-list');
+//     div.appendChild(ul);
+//   }
+//   const li = document.createElement('li');
+//   li.innerHTML = textInput.value;
+//   ul.appendChild(li);
+//   textInput.value = '';
+// }
+
+document.querySelector("form").addEventListener("submit", function(event) {
   event.preventDefault();
-  const div = document.getElementById('list');
-  let ul = document.getElementById('comments-list');
-  let textInput = document.getElementById('comment-input')
-  if (!ul) {
-    ul = document.createElement('ul');
-    ul.setAttribute('id', 'comments-list');
-    div.appendChild(ul);
-  }
-  const li = document.createElement('li');
-  li.innerHTML = textInput.value;
-  ul.appendChild(li);
-  textInput.value = '';
+  addComment();
+})
+
+function addComment() {
+  let comment = document.getElementById("comment-input");
+  let p = document.createElement("p");
+  let commentList = document.getElementById("list");
+  p.innerHTML = comment.value;
+  commentList.appendChild(p);
+  comment.value = "";
 }
